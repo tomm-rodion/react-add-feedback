@@ -1,9 +1,10 @@
 import { Component } from 'react';
+import { Wrapper } from './App.styled';
 
-import { Section } from './Section/Section';
-import { FeetbackOption } from './FeetbackOption/FeetbackOption';
-import { Statistics } from './Statistics/Statistics';
-import { Notification } from './Notification/Notification';
+import { Section } from '../Section/Section';
+import { FeetbackOption } from '../FeetbackOption/FeetbackOption';
+import { Statistics } from '../Statistics/Statistics';
+import { Notification } from '../Notification/Notification';
 
 export class App extends Component {
   state = {
@@ -37,7 +38,7 @@ export class App extends Component {
 
   render() {
     return (
-      <>
+      <Wrapper>
         <Section title={'Please leave feedback'}>
           <FeetbackOption
             options={Object.keys(this.state)}
@@ -55,7 +56,7 @@ export class App extends Component {
             />
           )}
         </Section>
-      </>
+      </Wrapper>
     );
   }
 }

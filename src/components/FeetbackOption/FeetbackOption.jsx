@@ -1,28 +1,14 @@
-export const FeetbackOption = ({
-  options,
-  onLeaveFeedback,
-  changeFeedbackGood,
-  changeFeedbackNeutral,
-  changeFeedbackBad,
-}) => {
+import { Button } from './FeetbackOption.styled';
+
+export const FeetbackOption = ({ options, onLeaveFeedback }) => {
   return options.map(option => (
-    <button key={option} onClick={() => onLeaveFeedback(option)}>
+    <Button
+      type="button"
+      buttonColorStatus={option}
+      key={option}
+      onClick={() => onLeaveFeedback(option)}
+    >
       {option}
-    </button>
+    </Button>
   ));
-  //   return (
-  //     <>
-  //       <button key={[option]}>{[option]}</button>
-  //       <h1>Please leave feedback</h1>
-  //       <button type="button" onClick={changeFeedbackGood}>
-  //         Good
-  //       </button>
-  //       <button type="button" onClick={changeFeedbackNeutral}>
-  //         Neutral
-  //       </button>
-  //       <button type="button" onClick={changeFeedbackBad}>
-  //         Bad
-  //       </button>
-  //     </>
-  //   );
 };
