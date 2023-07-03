@@ -1,30 +1,53 @@
 import styled from '@emotion/styled';
+import { btn } from 'components/Style/mixins';
+
+const color = {
+  keyColor: props => {
+    switch (props.buttonColorStatus) {
+      case 'good':
+        return 'rgb(2, 110, 2)';
+      case 'neutral':
+        return 'rgb(0, 0, 255, 1.9)';
+      case 'bad':
+        return 'rgb(255, 0, 0, 1.9)';
+      default:
+        throw new Error();
+    }
+  },
+  keyBgColor: props => {
+    switch (props.buttonColorStatus) {
+      case 'good':
+        return 'rgb(151, 192, 151, 0.3)';
+      case 'neutral':
+        return 'rgb(144, 144, 251, 0.4)';
+      case 'bad':
+        return 'rgb(255, 166, 166, 0.3)';
+      default:
+        throw new Error();
+    }
+  },
+};
 
 export const Button = styled.button`
+  ${btn()}
   align-items: center;
-  background-color: #fff;
-  border: 2px solid #000;
-  box-sizing: border-box;
-  color: #000;
+  background-color: #c6e3f9;
+  border: 2px solid #a2bbce;
+  color: inherit;
   cursor: pointer;
   display: inline-flex;
-  fill: #000;
+  fill: inherit;
   font-family: Inter, sans-serif;
   font-size: 16px;
   font-weight: 600;
   height: 48px;
   justify-content: center;
-  letter-spacing: -0.8px;
-  line-height: 24px;
   min-width: 140px;
-  outline: 0;
   padding: 15 5px;
   margin: 10px;
   text-align: center;
   text-decoration: none;
   transition: all 0.3s;
-  user-select: none;
-  -webkit-user-select: none;
   touch-action: manipulation;
   border-radius: 8px;
 
@@ -33,42 +56,10 @@ export const Button = styled.button`
   }
 
   &:hover {
-    border-color: ${props => {
-      switch (props.buttonColorStatus) {
-        case 'good':
-          return 'rgb(2, 110, 2)';
-        case 'neutral':
-          return 'rgb(0, 0, 255, 1.9)';
-        case 'bad':
-          return 'rgb(255, 0, 0, 1.9)';
-        default:
-          throw new Error();
-      }
-    }};
-    color: ${props => {
-      switch (props.buttonColorStatus) {
-        case 'good':
-          return 'rgb(2, 110, 2)';
-        case 'neutral':
-          return 'rgb(0, 0, 255, 1.9)';
-        case 'bad':
-          return 'rgb(255, 0, 0, 1.9)';
-        default:
-          throw new Error();
-      }
-    }};
-    fill: ${props => {
-      switch (props.buttonColorStatus) {
-        case 'good':
-          return 'rgb(2, 110, 2)';
-        case 'neutral':
-          return 'rgb(0, 0, 255, 1.9)';
-        case 'bad':
-          return 'rgb(255, 0, 0, 1.9)';
-        default:
-          throw new Error();
-      }
-    }};
+    border-color: ${color.keyColor};
+    color: ${color.keyColor};
+    fill: ${color.keyColor};
+    background-color: ${color.keyBgColor};
   }
 
   @media (min-width: 768px) {

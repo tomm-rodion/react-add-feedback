@@ -1,10 +1,11 @@
 import { Component } from 'react';
-import { Wrapper } from './App.styled';
+import { Wrapper, Contaner } from './App.styled';
 
 import { Section } from '../Section/Section';
 import { FeetbackOption } from '../FeetbackOption/FeetbackOption';
 import { Statistics } from '../Statistics/Statistics';
 import { Notification } from '../Notification/Notification';
+import { ContactBook } from 'components/ContactBook/ContactBook';
 
 export class App extends Component {
   state = {
@@ -12,16 +13,6 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-
-  // changeFeedbackGood = () => {
-  //   this.setState(prevState => ({ good: prevState.good + 1 }));
-  // };
-  // changeFeedbackNeutral = () => {
-  //   this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-  // };
-  // changeFeedbackBad = () => {
-  //   this.setState(prevState => ({ bad: prevState.bad + 1 }));
-  // };
 
   countTotalFeedback = () =>
     this.state.good + this.state.neutral + this.state.bad;
@@ -39,23 +30,28 @@ export class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Section title={'Please leave feedback'}>
-          <FeetbackOption
-            options={Object.keys(this.state)}
-            onLeaveFeedback={this.onLeaveFeedback}
-          />
-        </Section>
-        <Section title={'Statistics'}>
-          {!this.countTotalFeedback() ? (
-            <Notification massage={'There is no feedback'}></Notification>
-          ) : (
-            <Statistics
-              state={this.state}
-              total={this.countTotalFeedback}
-              positivePercentage={this.countPositiveFeedbackPercentage()}
+        <Contaner>
+          <Section title={'Please leave feedback'}>
+            <FeetbackOption
+              options={Object.keys(this.state)}
+              onLeaveFeedback={this.onLeaveFeedback}
             />
-          )}
-        </Section>
+          </Section>
+          <Section title={'Statistics'}>
+            {!this.countTotalFeedback() ? (
+              <Notification massage={'There is no feedback'}></Notification>
+            ) : (
+              <Statistics
+                state={this.state}
+                total={this.countTotalFeedback}
+                positivePercentage={this.countPositiveFeedbackPercentage()}
+              />
+            )}
+          </Section>
+        </Contaner>
+        <Contaner>
+          <ContactBook></ContactBook>
+        </Contaner>
       </Wrapper>
     );
   }

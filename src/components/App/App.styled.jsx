@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-  box-sizing: border-box;
-  max-width: 320px;
-  padding: 15px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const Contaner = styled.section`
   margin: 20px;
   padding: 22px;
-  color: #5a5858;
+  color: #272626;
   border: 2px dashed #2196f3;
+  border-radius: 8px;
 `;
