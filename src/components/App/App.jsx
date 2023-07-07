@@ -50,7 +50,9 @@ export class App extends Component {
           </Section>
         </Contaner>
         <Contaner>
-          <ContactBook></ContactBook>
+          <Section title={'Phonebook'}>
+            <ContactBook></ContactBook>
+          </Section>
         </Contaner>
       </Wrapper>
     );
