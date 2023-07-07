@@ -3,6 +3,8 @@ import {
   WrapperContacts,
   SectionContacts,
   FormaAddContacts,
+  ButtonAddContact,
+  LabelForm,
 } from '../ContactBook/ContactBook.styled';
 import { Contacts } from './Form/Contacts';
 import { Contaner } from 'components/App/App.styled';
@@ -30,19 +32,20 @@ export class ContactBook extends Component {
       <>
         <WrapperContacts>
           <FormaAddContacts onSubmit={this.handlerAddContacts}>
-            <label>
+            <LabelForm>
               Name
               <input
+                style={{ marginLeft: '5px' }}
                 type="text"
                 name="name"
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
-                value={this.state.name} // Додавання значення зі стану до поля вводу
-                onChange={event => this.setState({ name: event.target.value })} // Оновлення стану name
+                value={this.state.name}
+                onChange={event => this.setState({ name: event.target.value })}
               />
-            </label>
-            <button>Add contact</button>
+            </LabelForm>
+            <ButtonAddContact>Add contact</ButtonAddContact>
           </FormaAddContacts>
 
           <Contaner>
