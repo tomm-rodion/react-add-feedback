@@ -9,6 +9,7 @@ import {
 import { Contacts } from './Form/Contacts';
 import { Contaner } from 'components/App/App.styled';
 import { nanoid } from 'nanoid';
+import { SearchContact } from './SearchContact/SearchContact';
 
 export class ContactBook extends Component {
   state = {
@@ -38,16 +39,13 @@ export class ContactBook extends Component {
                 style={{ marginLeft: '5px' }}
                 type="text"
                 name="name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-                required
                 value={this.state.name}
                 onChange={event => this.setState({ name: event.target.value })}
               />
             </LabelForm>
             <ButtonAddContact>Add contact</ButtonAddContact>
           </FormaAddContacts>
-
+          <SearchContact contactsList={this.state.contacts}></SearchContact>
           <Contaner>
             <SectionContacts>
               <Contacts newContacts={this.state.contacts}></Contacts>
