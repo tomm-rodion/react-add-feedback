@@ -3,9 +3,9 @@ import {
   ContactItem,
   ContactsContainer,
   ContactsTitle,
-} from './Contacts.styled';
+} from './ContactList.styled';
 
-export const Contacts = ({ newContacts }) => {
+export const ContactsList = ({ newContacts }) => {
   return (
     <ContactsContainer>
       <ContactsTitle>Contacts</ContactsTitle>

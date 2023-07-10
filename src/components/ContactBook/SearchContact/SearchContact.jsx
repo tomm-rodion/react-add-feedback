@@ -1,23 +1,37 @@
 import { Component } from 'react';
 import { LabelForm } from '../ContactBook.styled';
+import { FoundContactList } from '../FoundContactList/FoundContactList';
 
 export class SearchContact extends Component {
   state = {
-    searchContact: '',
+    ollContacts: this.props.contactsList,
+    searchContactLetter: '',
+    foundContact: [],
   };
 
   handlerSearchContacts = event => {
     event.preventDefault();
-    this.setState({ searchContact: event.target.value });
-    const SEARCHLEITER = this.state.searchContact;
-    const CONTACTS = this.props.contactsList;
-    const searchResult = CONTACTS.filter(objContact =>
-      objContact.name.includes(SEARCHLEITER)
-    );
-    console.log(searchResult);
+    this.setState({ searchContactLetter: event.currentTarget.value });
+    this.search();
+  };
+
+  search = () => {
+    let filterContact;
+    if (this.state.searchContactLetter) {
+      filterContact = this.props.contactsList.filter(
+        contact =>
+          contact.name.includes(this.state.searchContactLetter) ||
+          contact.name.toLowerCase().includes(this.state.searchContactLetter)
+      );
+    } else {
+      return (filterContact = 'Нічого не знайдено!');
+    }
+
+    this.setState({ foundContact: [...filterContact] });
   };
 
   render() {
+    const { foundContact, searchContactLetter } = this.state;
     return (
       <>
         <form>
@@ -28,9 +42,10 @@ export class SearchContact extends Component {
               name="search"
               title="Search contact for name"
               onChange={this.handlerSearchContacts}
-              value={this.state.searchContact}
+              value={searchContactLetter}
             />
           </LabelForm>
+          <FoundContactList foundContact={foundContact}></FoundContactList>
         </form>
       </>
     );

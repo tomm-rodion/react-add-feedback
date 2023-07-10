@@ -6,10 +6,10 @@ import {
   ButtonAddContact,
   LabelForm,
 } from '../ContactBook/ContactBook.styled';
-import { Contacts } from './Form/Contacts';
 import { Contaner } from 'components/App/App.styled';
 import { nanoid } from 'nanoid';
 import { SearchContact } from './SearchContact/SearchContact';
+import { ContactsList } from './ContactList/ContactList';
 
 export class ContactBook extends Component {
   state = {
@@ -28,7 +28,7 @@ export class ContactBook extends Component {
   };
 
   render() {
-    console.log(this.state.contacts);
+    const { contacts } = this.state;
     return (
       <>
         <WrapperContacts>
@@ -45,10 +45,10 @@ export class ContactBook extends Component {
             </LabelForm>
             <ButtonAddContact>Add contact</ButtonAddContact>
           </FormaAddContacts>
-          <SearchContact contactsList={this.state.contacts}></SearchContact>
+          <SearchContact contactsList={contacts}></SearchContact>
           <Contaner>
             <SectionContacts>
-              <Contacts newContacts={this.state.contacts}></Contacts>
+              <ContactsList newContacts={contacts}></ContactsList>
             </SectionContacts>
           </Contaner>
         </WrapperContacts>
