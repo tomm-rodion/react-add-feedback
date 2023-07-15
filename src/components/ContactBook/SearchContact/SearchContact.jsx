@@ -1,37 +1,43 @@
 import { Component } from 'react';
-import { LabelForm } from '../ContactBook.styled';
+import { LabelForm } from '../ContactsForm/ContactsForm.styled';
 import { FoundContactList } from '../FoundContactList/FoundContactList';
 
 export class SearchContact extends Component {
   state = {
     ollContacts: this.props.contactsList,
-    searchContactLetter: '',
+    inputValue: '',
     foundContact: [],
   };
 
-  handlerSearchContacts = event => {
-    event.preventDefault();
-    this.setState({ searchContactLetter: event.currentTarget.value });
-    this.search();
+  handleChange = event => {
+    this.setState({ inputValue: event.target.value, foundContact: [] });
+    const filterContact = this.props.contactsList.filter(
+      contact =>
+        contact.name.includes(this.state.inputValue) ||
+        contact.name.toLowerCase().includes(this.state.inputValue)
+    );
+    this.setState({ foundContact: filterContact });
   };
 
-  search = () => {
-    let filterContact;
-    if (this.state.searchContactLetter) {
-      filterContact = this.props.contactsList.filter(
-        contact =>
-          contact.name.includes(this.state.searchContactLetter) ||
-          contact.name.toLowerCase().includes(this.state.searchContactLetter)
-      );
-    } else {
-      return (filterContact = 'Нічого не знайдено!');
-    }
-
-    this.setState({ foundContact: [...filterContact] });
-  };
+  //   searchContacts = () => {
+  //     let filterContact = [];
+  //     if (this.state.inputValue === '') {
+  //       filterContact = this.props.contactsList.filter(
+  //         contact =>
+  //           contact.name.includes(this.state.inputValue) ||
+  //           contact.name.toLowerCase().includes(this.state.inputValue)
+  //       );
+  //     } else {
+  //         return (filterContact = ['Нічого не знайдено!']);
+  //     }
+  //     console.log(filterContact);
+  //       this.setState({ foundContact: filterContact });
+  //   };
 
   render() {
-    const { foundContact, searchContactLetter } = this.state;
+    const { foundContact, inputValue } = this.state;
+    console.log(inputValue);
+    console.log(foundContact);
     return (
       <>
         <form>
@@ -41,8 +47,8 @@ export class SearchContact extends Component {
               type="text"
               name="search"
               title="Search contact for name"
-              onChange={this.handlerSearchContacts}
-              value={searchContactLetter}
+              onChange={this.handleChange}
+              value={inputValue}
             />
           </LabelForm>
           <FoundContactList foundContact={foundContact}></FoundContactList>
