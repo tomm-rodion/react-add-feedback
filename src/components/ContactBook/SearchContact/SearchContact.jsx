@@ -1,43 +1,20 @@
 import { Component } from 'react';
 import { LabelForm } from '../ContactsForm/ContactsForm.styled';
-import { FoundContactList } from '../FoundContactList/FoundContactList';
 
 export class SearchContact extends Component {
   state = {
-    ollContacts: this.props.contactsList,
     inputValue: '',
-    foundContact: [],
   };
 
   handleChange = event => {
-    this.setState({ inputValue: event.target.value, foundContact: [] });
-    const filterContact = this.props.contactsList.filter(
-      contact =>
-        contact.name.includes(this.state.inputValue) ||
-        contact.name.toLowerCase().includes(this.state.inputValue)
-    );
-    this.setState({ foundContact: filterContact });
+    const data = event.target.value;
+    this.setState({ inputValue: data });
+    this.props.onSaerch(data);
+    console.log('delete later :', data);
   };
 
-  //   searchContacts = () => {
-  //     let filterContact = [];
-  //     if (this.state.inputValue === '') {
-  //       filterContact = this.props.contactsList.filter(
-  //         contact =>
-  //           contact.name.includes(this.state.inputValue) ||
-  //           contact.name.toLowerCase().includes(this.state.inputValue)
-  //       );
-  //     } else {
-  //         return (filterContact = ['Нічого не знайдено!']);
-  //     }
-  //     console.log(filterContact);
-  //       this.setState({ foundContact: filterContact });
-  //   };
-
   render() {
-    const { foundContact, inputValue } = this.state;
-    console.log(inputValue);
-    console.log(foundContact);
+    const { inputValue } = this.state;
     return (
       <>
         <form>
@@ -51,7 +28,6 @@ export class SearchContact extends Component {
               value={inputValue}
             />
           </LabelForm>
-          <FoundContactList foundContact={foundContact}></FoundContactList>
         </form>
       </>
     );
