@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   WrapperContacts,
   SectionContacts,
+  WrapperForm,
 } from '../ContactBook/ContactBook.styled';
 import { Contaner } from 'components/App/App.styled';
 import { nanoid } from 'nanoid';
@@ -60,11 +61,13 @@ export class ContactBook extends Component {
     return (
       <>
         <WrapperContacts>
-          <ContactsForm
-            onSubmit={this.onFormSubmit}
-            contacts={contacts}
-          ></ContactsForm>
-          <SearchContact onSaerch={this.onSearchContact}></SearchContact>
+          <WrapperForm>
+            <ContactsForm
+              onSubmit={this.onFormSubmit}
+              contacts={contacts}
+            ></ContactsForm>
+            <SearchContact onSaerch={this.onSearchContact}></SearchContact>
+          </WrapperForm>
           <Contaner>
             <SectionContacts>
               {this.state.valueSearchContact === '' ? (

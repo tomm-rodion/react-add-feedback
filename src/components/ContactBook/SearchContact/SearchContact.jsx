@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { LabelForm } from '../ContactsForm/ContactsForm.styled';
+import { LabelSerchContact } from './SearchContact.styled';
 
 export class SearchContact extends Component {
   state = {
@@ -18,7 +18,7 @@ export class SearchContact extends Component {
     return (
       <>
         <form>
-          <LabelForm style={{ marginLeft: '5px', marginTop: '20px' }}>
+          <LabelSerchContact>
             Search contact
             <input
               type="text"
@@ -27,7 +27,7 @@ export class SearchContact extends Component {
               onChange={this.handleChange}
               value={inputValue}
             />
-          </LabelForm>
+          </LabelSerchContact>
         </form>
       </>
     );
