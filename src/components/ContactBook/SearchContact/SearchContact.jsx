@@ -10,7 +10,6 @@ export class SearchContact extends Component {
     const data = event.target.value;
     this.setState({ inputValue: data });
     this.props.onSaerch(data);
-    console.log('delete later :', data);
   };
 
   render() {

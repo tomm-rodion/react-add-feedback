@@ -49,7 +49,6 @@ export class ContactBook extends Component {
   };
 
   deleteContact = id => {
-    console.log(id);
     const resultFilter = this.state.contacts.filter(
       contact => contact.id !== id
     );

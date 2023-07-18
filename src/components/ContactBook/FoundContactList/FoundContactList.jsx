@@ -1,5 +1,4 @@
 export const FoundContactList = ({ foundContact, valueSearchContact }) => {
-  console.log(foundContact);
   return (
     <>
       <h2>Found Contacts</h2>
@@ -17,5 +16,3 @@ export const FoundContactList = ({ foundContact, valueSearchContact }) => {
     </>
   );
 };
-
-// if(valueSearchContact.length>0)
