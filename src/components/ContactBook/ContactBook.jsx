@@ -23,6 +23,23 @@ export class ContactBook extends Component {
     valueSearchContact: '',
   };
 
+  componentDidMount() {
+    console.log('componentDidMount');
+    const contacts = localStorage.getItem('contacts');
+    const parsContacts = JSON.parse(contacts);
+    console.log(parsContacts); // arrey []
+    if (parsContacts.length > 0) {
+      this.setState({ contacts: parsContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate');
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   onFormSubmit = (name, number) => {
     this.setState(prevState => {
       const newContact = { id: nanoid(), name, number };
