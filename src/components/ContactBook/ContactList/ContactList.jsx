@@ -5,7 +5,12 @@ import {
   ContactsTitle,
 } from './ContactList.styled';
 
-export const ContactsList = ({ newContacts, onDelete }) => {
+export const ContactsList = ({
+  newContacts,
+  onDelete,
+  onToggleModal,
+  onInfoIdContact,
+}) => {
   return (
     <ContactsContainer>
       <ContactsTitle>Contacts</ContactsTitle>
@@ -15,7 +20,15 @@ export const ContactsList = ({ newContacts, onDelete }) => {
             <span>
               {contact.name}:{contact.number}
             </span>
-            <button onClick={() => onDelete(contact.id)}>Delete</button>
+            <button type="button" onClick={() => onDelete(contact.id)}>
+              Delete
+            </button>
+            <button
+              type="button"
+              onClick={(onToggleModal, () => onInfoIdContact(contact.id))}
+            >
+              Inf-window
+            </button>
           </ContactItem>
         ))}
       </ContactList>

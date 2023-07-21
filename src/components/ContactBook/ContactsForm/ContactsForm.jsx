@@ -4,7 +4,7 @@ import {
   ButtonAddContact,
 } from '../ContactsForm/ContactsForm.styled';
 
-export const ContactsForm = ({ onSubmit, contacts }) => {
+export const ContactsForm = ({ onSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
     const { name, number } = event.target.elements;

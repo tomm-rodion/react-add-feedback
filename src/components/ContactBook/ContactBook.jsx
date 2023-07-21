@@ -10,6 +10,7 @@ import { SearchContact } from './SearchContact/SearchContact';
 import { ContactsList } from './ContactList/ContactList';
 import { ContactsForm } from './ContactsForm/ContactsForm';
 import { FoundContactList } from './FoundContactList/FoundContactList';
+import { Modal } from 'components/Modal/Modal';
 
 export class ContactBook extends Component {
   state = {
@@ -21,6 +22,8 @@ export class ContactBook extends Component {
     ],
     filter: [],
     valueSearchContact: '',
+    time: new Date(),
+    showModal: false,
   };
 
   componentDidMount() {
@@ -28,7 +31,7 @@ export class ContactBook extends Component {
     const contacts = localStorage.getItem('contacts');
     const parsContacts = JSON.parse(contacts);
     console.log(parsContacts); // arrey []
-    if (parsContacts.length > 0) {
+    if (parsContacts) {
       this.setState({ contacts: parsContacts });
     }
   }
@@ -40,9 +43,16 @@ export class ContactBook extends Component {
     }
   }
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+    console.log('state: showModal в component ContactBoock змінився!');
+  };
+
   onFormSubmit = (name, number) => {
+    const timeAddContact = this.state.time;
+    console.log(timeAddContact.toDateString());
     this.setState(prevState => {
-      const newContact = { id: nanoid(), name, number };
+      const newContact = { id: nanoid(), name, number, time: timeAddContact };
       return { contacts: [newContact, ...prevState.contacts] };
     });
   };
@@ -72,16 +82,26 @@ export class ContactBook extends Component {
     this.setState({ contacts: resultFilter });
   };
 
+  onInfoIdContact = id => {
+    console.log('ID IINFO', id);
+  };
+
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
     return (
       <>
         <WrapperContacts>
+          {this.state.showModal && (
+            <Modal onClose={this.toggleModal}>
+              <h2>Сontact information</h2>
+              <span>{this.state.contacts}</span>
+              <button onClick={this.toggleModal} type="button">
+                Close
+              </button>
+            </Modal>
+          )}
           <WrapperForm>
-            <ContactsForm
-              onSubmit={this.onFormSubmit}
-              contacts={contacts}
-            ></ContactsForm>
+            <ContactsForm onSubmit={this.onFormSubmit}></ContactsForm>
             <SearchContact onSaerch={this.onSearchContact}></SearchContact>
           </WrapperForm>
           <Contaner>
@@ -90,6 +110,8 @@ export class ContactBook extends Component {
                 <ContactsList
                   newContacts={this.state.contacts}
                   onDelete={this.deleteContact}
+                  onToggleModal={this.toggleModal}
+                  onInfoIdContact={this.onInfoIdContact}
                 ></ContactsList>
               ) : (
                 <FoundContactList
