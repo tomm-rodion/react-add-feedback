@@ -6,7 +6,6 @@ import { FeetbackOption } from '../FeetbackOption/FeetbackOption';
 import { Statistics } from '../Statistics/Statistics';
 import { Notification } from '../Notification/Notification';
 import { ContactBook } from 'components/ContactBook/ContactBook';
-// import { Modal } from 'components/Modal/Modal';
 
 export class App extends Component {
   state = {
@@ -15,7 +14,6 @@ export class App extends Component {
       neutral: 0,
       bad: 0,
     },
-    // showModal: false,
   };
 
   componentDidMount() {
@@ -33,10 +31,6 @@ export class App extends Component {
       localStorage.setItem('feedback', JSON.stringify(this.state));
     }
   }
-  // toggleModal = () => {
-  //   this.setState(({ showModal }) => ({ showModal: !showModal }));
-  //   console.log('toggleModal змінився!');
-  // };
 
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state.optionFeedback;
@@ -56,20 +50,6 @@ export class App extends Component {
   render() {
     return (
       <Wrapper>
-        {/* {this.state.showModal && (
-          <Modal onClose={this.toggleModal}>
-            <h2>😎</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur iure repellendus eaque temporibus odio dolorem nemo.
-              Odio corporis veniam, reprehenderit voluptatibus quaerat culpa
-              voluptates temporibus, assumenda delectus quam labore numquam.
-            </p>
-            <button onClick={this.toggleModal} type="button">
-              Close
-            </button>
-          </Modal>
-        )} */}
         <Contaner>
           <Section title={'Please leave feedback'}>
             <FeetbackOption
@@ -98,5 +78,3 @@ export class App extends Component {
     );
   }
 }
-
-// <ContactBook onToggleModal={this.toggleModal}></ContactBook>

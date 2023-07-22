@@ -84,17 +84,18 @@ export class ContactBook extends Component {
 
   onInfoIdContact = id => {
     console.log('ID IINFO', id);
+    this.toggleModal();
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, valueSearchContact, contacts, showModal } = this.state;
     return (
       <>
         <WrapperContacts>
-          {this.state.showModal && (
+          {showModal && (
             <Modal onClose={this.toggleModal}>
-              <h2>Сontact information</h2>
-              <span>{this.state.contacts}</span>
+              <h2>About contact information</h2>
+              <span>тут буде інформація</span>
               <button onClick={this.toggleModal} type="button">
                 Close
               </button>
@@ -106,17 +107,16 @@ export class ContactBook extends Component {
           </WrapperForm>
           <Contaner>
             <SectionContacts>
-              {this.state.valueSearchContact === '' ? (
+              {valueSearchContact === '' ? (
                 <ContactsList
-                  newContacts={this.state.contacts}
+                  newContacts={contacts}
                   onDelete={this.deleteContact}
-                  onToggleModal={this.toggleModal}
                   onInfoIdContact={this.onInfoIdContact}
                 ></ContactsList>
               ) : (
                 <FoundContactList
                   foundContact={filter}
-                  valueSearchContact={this.state.valueSearchContact}
+                  valueSearchContact={valueSearchContact}
                 ></FoundContactList>
               )}
             </SectionContacts>
