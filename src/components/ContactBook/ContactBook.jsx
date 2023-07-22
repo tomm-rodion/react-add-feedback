@@ -84,18 +84,36 @@ export class ContactBook extends Component {
 
   onInfoIdContact = id => {
     console.log('ID IINFO', id);
+    this.InfoContactAboutModal = this.state.contacts.filter(
+      contact => contact.id === id
+    );
+
     this.toggleModal();
   };
 
+  InfoContactAboutModal = [];
+
   render() {
     const { filter, valueSearchContact, contacts, showModal } = this.state;
+    // const { name, number, time } = { ...this.InfoContactAboutModal };
+    const objInfContactModal = { ...this.InfoContactAboutModal[0] };
     return (
       <>
         <WrapperContacts>
           {showModal && (
             <Modal onClose={this.toggleModal}>
               <h2>About contact information</h2>
-              <span>тут буде інформація</span>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
+                incidunt eligendi accusamus quia reiciendis facere veritatis
+                itaque quisquam corporis tempora!
+              </p>
+              <span>Name:</span>
+              <span>{objInfContactModal.name}</span>
+              <span>Number:</span>
+              <span>{objInfContactModal.number}</span>
+              <span>Contact added</span>
+              <span>{objInfContactModal.time}</span>
               <button onClick={this.toggleModal} type="button">
                 Close
               </button>
