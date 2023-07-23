@@ -11,6 +11,7 @@ import { ContactsList } from './ContactList/ContactList';
 import { ContactsForm } from './ContactsForm/ContactsForm';
 import { FoundContactList } from './FoundContactList/FoundContactList';
 import { Modal } from 'components/Modal/Modal';
+import { InfoModal } from './InfoModal/InfoModal';
 
 export class ContactBook extends Component {
   state = {
@@ -22,7 +23,7 @@ export class ContactBook extends Component {
     ],
     filter: [],
     valueSearchContact: '',
-    time: new Date(),
+
     showModal: false,
   };
 
@@ -49,10 +50,22 @@ export class ContactBook extends Component {
   };
 
   onFormSubmit = (name, number) => {
-    const timeAddContact = this.state.time;
-    console.log(timeAddContact.toDateString());
+    const timeAddContact = new Date();
+    // console.log(timeAddContact.toDateString()); time: new Date(),
     this.setState(prevState => {
-      const newContact = { id: nanoid(), name, number, time: timeAddContact };
+      const newContact = {
+        id: nanoid(),
+        name,
+        number,
+        time: {
+          year: timeAddContact.getFullYear().toString().padStart(2, '0'),
+          month: (timeAddContact.getMonth() + 1).toString().padStart(2, '0'),
+          date: timeAddContact.getDate().toString().padStart(2, '0'),
+          hours: timeAddContact.getHours().toString().padStart(2, '0'),
+          minutes: timeAddContact.getMinutes().toString().padStart(2, '0'),
+          seconds: timeAddContact.getSeconds().toString().padStart(2, '0'),
+        },
+      };
       return { contacts: [newContact, ...prevState.contacts] };
     });
   };
@@ -95,28 +108,16 @@ export class ContactBook extends Component {
 
   render() {
     const { filter, valueSearchContact, contacts, showModal } = this.state;
-    // const { name, number, time } = { ...this.InfoContactAboutModal };
     const objInfContactModal = { ...this.InfoContactAboutModal[0] };
     return (
       <>
         <WrapperContacts>
           {showModal && (
             <Modal onClose={this.toggleModal}>
-              <h2>About contact information</h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-                incidunt eligendi accusamus quia reiciendis facere veritatis
-                itaque quisquam corporis tempora!
-              </p>
-              <span>Name:</span>
-              <span>{objInfContactModal.name}</span>
-              <span>Number:</span>
-              <span>{objInfContactModal.number}</span>
-              <span>Contact added</span>
-              <span>{objInfContactModal.time}</span>
-              <button onClick={this.toggleModal} type="button">
-                Close
-              </button>
+              <InfoModal
+                objInfContactModal={objInfContactModal}
+                toggleModal={this.toggleModal}
+              ></InfoModal>
             </Modal>
           )}
           <WrapperForm>
