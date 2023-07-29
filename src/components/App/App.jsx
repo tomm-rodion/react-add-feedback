@@ -9,15 +9,13 @@ import { ContactBook } from 'components/ContactBook/ContactBook';
 
 export class App extends Component {
   state = {
-    optionFeedback: {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    },
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
   componentDidMount() {
-    const { good, neutral, bad } = this.state.optionFeedback;
+    const { good, neutral, bad } = this.state;
     if (good + neutral + bad === 0) {
       const prevsFeedback = JSON.parse(localStorage.getItem('feedback'));
       console.log('Отримали та розпарсили з localStorage : ', prevsFeedback);
@@ -33,7 +31,7 @@ export class App extends Component {
   }
 
   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state.optionFeedback;
+    const { good, neutral, bad } = this.state;
     return good + neutral + bad;
   };
 
@@ -53,7 +51,7 @@ export class App extends Component {
         <Contaner>
           <Section title={'Please leave feedback'}>
             <FeetbackOption
-              options={Object.keys(this.state.optionFeedback)}
+              options={Object.keys(this.state)}
               onLeaveFeedback={this.onLeaveFeedback}
             />
           </Section>
@@ -62,7 +60,7 @@ export class App extends Component {
               <Notification massage={'There is no feedback'}></Notification>
             ) : (
               <Statistics
-                state={this.state.optionFeedback}
+                state={this.state}
                 total={this.countTotalFeedback}
                 positivePercentage={this.countPositiveFeedbackPercentage()}
               />
