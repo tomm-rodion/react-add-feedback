@@ -3,6 +3,7 @@ import {
   ContactItem,
   ContactsContainer,
   ContactsTitle,
+  ButtonDalate,
 } from './ContactList.styled';
 
 export const ContactsList = ({ newContacts, onDelete, onInfoIdContact }) => {
@@ -13,14 +14,17 @@ export const ContactsList = ({ newContacts, onDelete, onInfoIdContact }) => {
         {newContacts.map(contact => (
           <ContactItem key={contact.id}>
             <span>
-              {contact.name}:{contact.number}
+              {contact.name[0].toUpperCase() + contact.name.slice(1)} :{' '}
+              {contact.number}
             </span>
-            <button type="button" onClick={() => onDelete(contact.id)}>
-              Delete
-            </button>
-            <button type="button" onClick={() => onInfoIdContact(contact.id)}>
-              Contact information
-            </button>
+            <span>
+              <ButtonDalate type="button" onClick={() => onDelete(contact.id)}>
+                Delete
+              </ButtonDalate>
+              <button type="button" onClick={() => onInfoIdContact(contact.id)}>
+                Contact information
+              </button>
+            </span>
           </ContactItem>
         ))}
       </ContactList>
