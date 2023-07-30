@@ -44,7 +44,7 @@ export class App extends Component {
       [option]: prevState[option] + 1,
     }));
   };
-
+  slice;
   render() {
     return (
       <Wrapper>
