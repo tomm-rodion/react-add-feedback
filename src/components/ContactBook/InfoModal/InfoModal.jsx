@@ -15,7 +15,7 @@ export const InfoModal = ({
   return (
     <>
       <ModalTitle>About contact information</ModalTitle>
-      <IconButton onClick={toggleModal}>
+      <IconButton onClick={toggleModal} aria-label="Close modal windiw">
         <CloseIcon width="22" height="22" fill="#fff"></CloseIcon>
       </IconButton>
 
@@ -35,10 +35,14 @@ export const InfoModal = ({
         </li>
         <li>
           <span>Contact added : </span>
-          <span>
-            {time.date}. {time.month}. {time.year} ({time.hours}:{time.minutes}:
-            {time.seconds})
-          </span>
+          {time.date ? (
+            <span>
+              {time.date}. {time.month}. {time.year} ({time.hours}:
+              {time.minutes}:{time.seconds})
+            </span>
+          ) : (
+            <span>Unfortunately, this information is not available 🙄</span>
+          )}
         </li>
       </ul>
       {/* <ModalBtnClose onClick={toggleModal} type="button">
